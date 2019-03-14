@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="184e09d5-9cad-41cc-adef-f79a0e449754" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/mySql/news.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/template/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main/Main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cpu.out" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mem.out" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news-reader" beforeDir="false" afterPath="$PROJECT_DIR$/news-reader" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/news.go" beforeDir="false" />
-    </list>
+    <list default="true" id="184e09d5-9cad-41cc-adef-f79a0e449754" name="Default Changelist" comment="Some changes" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,8 +32,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main/Main.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="55" column="27" selection-start-line="55" selection-start-column="27" selection-end-line="55" selection-end-column="27" />
+            <state relative-caret-position="494">
+              <caret line="81" lean-forward="true" selection-start-line="81" selection-end-line="81" />
               <folding>
                 <element signature="e#14#118#0" expanded="true" />
               </folding>
@@ -103,8 +92,8 @@
         <option value="$PROJECT_DIR$/Main.go" />
         <option value="$PROJECT_DIR$/db/news.go" />
         <option value="$PROJECT_DIR$/news.go" />
-        <option value="$PROJECT_DIR$/main/Main.go" />
         <option value="$PROJECT_DIR$/mySql/news.go" />
+        <option value="$PROJECT_DIR$/main/Main.go" />
       </list>
     </option>
   </component>
@@ -244,6 +233,7 @@
       <window_info id="Structure" order="0" sideWeight="0.50089765" side_tool="true" weight="0.2497332" />
       <window_info id="Favorites" order="1" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="2" sideWeight="0.49910232" visible="true" weight="0.25506938" />
+      <window_info anchor="bottom" id="GitHub Pull Requests" weight="0.32948583" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3297414" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32843652" />
@@ -253,7 +243,7 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32903227" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32948583" />
       <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32948583" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -287,6 +277,10 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Some changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Some changes" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -433,8 +427,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/Main.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="55" column="27" selection-start-line="55" selection-start-column="27" selection-end-line="55" selection-end-column="27" />
+        <state relative-caret-position="494">
+          <caret line="81" lean-forward="true" selection-start-line="81" selection-end-line="81" />
           <folding>
             <element signature="e#14#118#0" expanded="true" />
           </folding>
