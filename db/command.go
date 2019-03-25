@@ -12,4 +12,4 @@ title, publishedDate
 
 var DropTable = `DROP TABLE news;`
 
-var SelectFromDatabase = "SELECT * FROM news"
+var SelectFromDatabase = `SELECT * FROM news`

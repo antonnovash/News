@@ -2,47 +2,94 @@ package db
 
 import (
 	"database/sql"
+	"encoding/xml"
 	"fmt"
 	"html/template"
 	"log"
 	"net/http"
 	"news-reader/cmd"
+	"news-reader/errors"
 )
 
-//Open Sql db
-func NewMySQLDb() (*sql.DB, error) {
-	db, err := sql.Open("mysql", "root:1234567@/News")
-	if err != nil {
-		log.Fatal("news.go:Error with open database : ", err)
-	}
-	if err := db.Ping(); err != nil {
-		log.Fatal(err)
-	}
-	return db, nil
-}
+var database *sql.DB
 
-// createTable creates the table
-func CreateDbTable(db *sql.DB) error {
-	stmt, err := db.Prepare(DropTable)
+func DatabaseInsert() error {
+	resp, err := http.Get("https://news.tut.by/rss/sport/football.rss")
 	if err != nil {
-		panic(err)
+		return errors.WrapError("DatabaseInsert", httpGetError, err)
 	}
-	defer stmt.Close()
-
-	_, err = stmt.Exec()
+	defer func() {
+		err = resp.Body.Close()
+		if err != nil {
+			log.Fatal(CloseError, err)
+		}
+	}()
+	rss := cmd.Rss{}
+	decoder := xml.NewDecoder(resp.Body)
+	err = decoder.Decode(&rss)
 	if err != nil {
-		panic(err)
+		return errors.WrapError("DatabaseInsert", DecodeError, err)
 	}
-	_, err = db.Exec(createTableStatements)
+	database, err = OpenMySQLDb()
 	if err != nil {
-		log.Fatal("Error with create table: %v", err)
+		return errors.WrapError("DatabaseInsert", OpenDatabaseError, err)
+	}
+	err = CreateDbTable(database)
+	if err != nil {
+		return errors.WrapError("DatabaseInsert", CreateTableError, err)
+	}
+	for _, item := range rss.Channel.Items {
+		stmt, err := database.Prepare(InsertIntoDatabase)
+		if err != nil {
+			return errors.WrapError("DatabaseInsert", DatabasePrepareError, err)
+		}
+		_, err = stmt.Exec(item.Title, item.PublishedDate)
+		if err != nil {
+			return errors.WrapError("DatabaseInsert", ExecError, err)
+		}
 	}
 	return nil
 }
 
+//Open MySql database
+func OpenMySQLDb() (*sql.DB, error) {
+	db, err := sql.Open("mysql", "root:1234567@/News")
+	if err != nil {
+		return nil, errors.WrapError("OpenMySQLDb", OpenDatabaseError, err)
+	}
+	if err := db.Ping(); err != nil {
+		return nil, errors.WrapError("OpenMySQLDb", PingError, err)
+	}
+	return db, nil
+}
+
+// Create MySql table
+func CreateDbTable(db *sql.DB) error {
+	stmt, err := db.Prepare(DropTable)
+	if err != nil {
+		return errors.WrapError("CreateDbTable", DropDatabaseError, err)
+	}
+	defer func() {
+		err = stmt.Close()
+		if err != nil {
+			log.Fatal(CloseError, err)
+		}
+	}()
+	_, err = stmt.Exec()
+	if err != nil {
+		return errors.WrapError("CreateDbTable", ExecError, err)
+	}
+	_, err = db.Exec(createTableStatements)
+	if err != nil {
+		return errors.WrapError("CreateDbTable", CreateTableError, err)
+	}
+	return nil
+}
+
+//Write news to server and read from database
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
 
-	rows, err := cmd.Database.Query(SelectFromDatabase)
+	rows, err := database.Query(SelectFromDatabase)
 	if err != nil {
 		log.Println(err)
 	}
@@ -62,30 +109,12 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	tmpl, err := template.ParseFiles("template/index.html")
 	err = tmpl.Execute(w, items)
 	if err != nil {
-		log.Fatal("create.go:Error with writing template,execution stops.")
+		log.Fatal(TemplateWritingError)
 	}
-	/*if err != nil {
-		w.Write([]byte(err.Error()))
-		return
-	}
-
-	var b bytes.Buffer
-	tmpl.Execute(&b, items)
-	log.Println(b.String())*/
 }
-func drop(w http.ResponseWriter, r *http.Request) {
-	log.Println("drop collection")
 
-	stmt, err := cmd.Database.Prepare(DropTable)
+/*func CheckError(msg string, err error) {
 	if err != nil {
-		panic(err)
+		log.Fatal(msg)
 	}
-	defer stmt.Close()
-
-	_, err = stmt.Exec()
-	if err != nil {
-		panic(err)
-	}
-
-	//CreateTable()
-}
+}*/

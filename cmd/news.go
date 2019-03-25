@@ -1,7 +1,5 @@
 package cmd
 
-import "database/sql"
-
 type Enclosure struct {
 	Url    string `xml:"url,attr"`
 	Length int64  `xml:"length,attr"`
@@ -28,4 +26,3 @@ type Channel struct {
 type Rss struct {
 	Channel Channel `xml:"channel"`
 }
-var Database *sql.DB

@@ -7,11 +7,11 @@
 <body>
 <table>
     <thead>
-    <th>Id</th><th>Title</th><th>PublishedDate</th>
+    <th>Number</th><th>Title</th><th>PublishedDate</th>
     </thead>
     {{range . }}
         <tr>
-            <td>{{.ID}}</td>
+            <td><span style="color:brown">{{.ID}}</span></td>
             <td>{{.Title}}</td>
             <td>{{.PublishedDate}}</td>
         </tr>
