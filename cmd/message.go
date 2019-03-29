@@ -1,7 +1,7 @@
-package db
+package cmd
 
 const (
-	httpGetError         = "Error with http.Get"
+	HttpGetError         = "Error with http.Get"
 	CloseError           = "Error with close"
 	DecodeError          = "Error with decode"
 	OpenDatabaseError    = "Error with Open database"

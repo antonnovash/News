@@ -2,12 +2,12 @@ package cmd
 
 type Enclosure struct {
 	Url    string `xml:"url,attr"`
-	Length int64  `xml:"length,attr"`
+	Length int    `xml:"length,attr"`
 	Type   string `xml:"type,attr"`
 }
 
 type Item struct {
-	ID            int64
+	ID            int
 	Title         string    `xml:"title"`
 	Link          string    `xml:"link"`
 	Description   string    `xml:"description"`
