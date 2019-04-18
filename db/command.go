@@ -1,15 +1,17 @@
 package db
 
-var createTableStatements = `CREATE TABLE IF NOT EXISTS news (
+var (
+	/*createTableStatements = `CREATE TABLE IF NOT EXISTS sportNews (
 		id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
 		title TEXT NULL,
 		publishedDate VARCHAR(255) NULL
-	)`
+	)`*/
+	InsertIntoDatabase = `INSERT INTO sportNews (
+		title, publishedDate
+		) VALUES (?, ?)`
+	CleanTable = `TRUNCATE TABLE sportNews;`
 
-var InsertIntoDatabase = `INSERT INTO news (
-title, publishedDate
-) VALUES (?, ?)`
+	SelectFromDatabase = `SELECT * FROM sportNews`
 
-var DropTable = `DROP TABLE news;`
-
-var SelectFromDatabase = `SELECT * FROM news`
+	GetNewsByID = `SELECT title FROM sportNews WHERE id=?`
+)

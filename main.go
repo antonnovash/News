@@ -4,7 +4,6 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"log"
 	"net/http"
-	"news-reader/cmd"
 	"news-reader/db"
 	"news-reader/errors"
 	"news-reader/handlers"
@@ -24,19 +23,19 @@ func main() {
 		WriteTimeout: time.Second * 10,
 		Handler:      r,
 	}
-	s.ListenAndServe()
-	/*h := http.NewServeMux()
-	h.HandleFunc("/", handlers.IndexHandler(t))
-	http.ListenAndServe(":3006", h)*/
+	_ = s.ListenAndServe()//TODO
 }
 
 func GetMySQL() (*db.MySQL, error) { //TODO
 	rss, err := handlers.DecodeRss()
 	m, err := db.OpenMySQLDb()
+	if err != nil {
+		log.Fatal(err)
+	}
 	err = m.CreateDbTable()
 	err = m.DatabaseInsert(rss)
 	if err != nil {
-		return nil, errors.WrapError("getMySQL", cmd.OpenDatabaseError, err)
+		return nil, errors.WrapError("GetMySQL", errors.OpenDatabaseError, err)
 	}
 	return m, nil
 }

@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
-	"news-reader/cmd"
+	"news-reader/errors"
 	"testing"
 )
 
@@ -61,7 +61,7 @@ func TestHttpConnection(t *testing.T) {
 	defer func() {
 		err = resp.Body.Close()
 		if err != nil {
-			t.Error(cmd.CloseError, err)
+			t.Error(errors.CloseError, err)
 		}
 	}()
 	fmt.Printf("%s", greeting)
